@@ -126,6 +126,7 @@ NOTE: textdetector code solely tested in Windows so far. If having issues with r
 ------------------------------------
 
 **TODO in Consideration**
+- make deck list output saved into a .txt file.
 - add additional logic to handle double-faced/adventure cards
 - Allow automatic refreshing of box image directory images (delete before populating)
 - Test --answername option for full path variation
