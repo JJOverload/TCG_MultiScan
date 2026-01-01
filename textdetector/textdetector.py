@@ -435,10 +435,10 @@ if __name__ == "__main__":
             #populating list for min/max getting and text isolation
             wlist.append(int(vertices[j][0]))
             hlist.append(int(vertices[j][1]))
-            print("Appended:", (int(vertices[j][0]), int(vertices[j][1]) ) )
+            #print("Appended:", (int(vertices[j][0]), int(vertices[j][1]) ) )
         
 
-        print("-----Initial vertices for a box completed-----")
+        #print("-----Initial vertices for a box completed-----")
         # text: ymin, xmin, ymax, xmax
         # obj: ymin, xmin, ymax, xmax
         # order of parameters currently not synchronized with initial algorithm
@@ -464,9 +464,9 @@ if __name__ == "__main__":
     cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
     
 
-    print("-----Printing Out Initial \"bboxes\"-----:")
-    for b in bbox:
-        print(b)
+    #print("-----Printing Out Initial \"bboxes\"-----:")
+    #for b in bbox:
+    #    print(b)
 
     print("-----Merging Initial \"bboxes\"-----:")
     #Merge the boxes
