@@ -133,6 +133,7 @@ NOTE: textdetector code solely tested in Windows so far. If having issues with r
 - Allow automatic refreshing of box image directory images (delete before populating)
 - Test --answername option for full path variation
 - Focus on other TCG card names
+- Use EasyOCR or TrOCR (or try both in the future?) as an OCR upgrade to integrate more robust rotations in title images
 
 ------------------------------------
 
