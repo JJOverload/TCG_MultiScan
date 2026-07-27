@@ -1,0 +1,131 @@
+:root {
+  --bg: #14151a;
+  --surface: #1d1f26;
+  --border: #2c2f38;
+  --text: #e7e7ea;
+  --text-muted: #9294a0;
+  --accent: #6f5bd6;
+  --success: #3fae6b;
+  --error: #d6584f;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.app-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+}
+
+.error {
+  color: var(--error);
+  background: rgba(214, 88, 79, 0.1);
+  border: 1px solid rgba(214, 88, 79, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.empty {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.scan-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.scan-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.scan-thumb {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  object-fit: cover;
+  display: block;
+  background: #0b0c0f;
+}
+
+.scan-body {
+  padding: 0.85rem 1rem 1rem;
+}
+
+.scan-status {
+  display: inline-block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.scan-status--done {
+  color: var(--success);
+}
+
+.scan-status--error {
+  color: var(--error);
+}
+
+.scan-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.scan-cards li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.9rem;
+}
+
+.card-name {
+  font-weight: 500;
+}
+
+.card-confidence {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8rem;
+}
+
+.scan-empty,
+.scan-error {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.scan-error {
+  color: var(--error);
+}
