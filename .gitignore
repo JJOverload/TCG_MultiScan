@@ -2,5 +2,5 @@
 AtomicCards.json AllPrintings.json CardTypes.json textdetector/box_images/box1.jpg 
 textdetector/AtomicCards-old.json textdetector/AtomicCards-new.json 
 /textdetector/box_images_archive /textdetector/box_images/
-/textdetector/box_images_rotational_list_small *.json TCG_MultiScan/backend/.venv 
+/textdetector/box_images_rotational_list_small *.json TCG_MultiScan/backend/.venv/
 TCG_MultiScan/backend/__pycache__/
