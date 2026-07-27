@@ -1,0 +1,8 @@
+fastapi>=0.111
+uvicorn[standard]>=0.30
+python-multipart>=0.0.9
+opencv-python-headless>=4.9
+pytesseract>=0.3.10
+pandas>=2.2
+textdistance>=4.6
+Pillow>=10.3

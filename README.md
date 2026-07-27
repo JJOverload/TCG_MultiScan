@@ -154,6 +154,14 @@ https://stackoverflow.com/questions/55593506/merge-the-bounding-boxes-near-by-in
 
 
 ------------------------------------
+**Created new improvements using Claude**
+
+Files:
+- box_merging.py
+- main.py
+- vocab.py
+
+------------------------------------
 
 **References**
 
