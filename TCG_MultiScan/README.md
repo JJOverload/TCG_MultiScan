@@ -52,6 +52,13 @@ displaying data parsed straight from your backend
 
 ------------------------------------
 
+`pip install mypy`
+
+------------------------------------
+
+
+
+
 **References**
 
 Google AI mode for generating instructions for initial setup and template code:
