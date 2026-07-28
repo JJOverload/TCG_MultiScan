@@ -61,7 +61,7 @@ displaying data parsed straight from your backend
 
 ------------------------------------
 
-If you need the optinoal static type checker for Python:
+If you need the optional static type checker for Python:
 
 `pip install mypy`
 
