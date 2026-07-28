@@ -6,9 +6,8 @@ CardTypes.json
 /textdetector/AtomicCards-new.json 
 /textdetector/box_images_archive
 /textdetector/box_images_rotational_list_small
+/textdetector/box_images/
 *.json
 /TCG_MultiScan/backend/.venv/
 /TCG_MultiScan/backend/__pycache__/
-/textdetector/box_images
-/textdetector/box_images_archive
-/textdetector/box_images_rotational_list_small
+
