@@ -1,6 +1,15 @@
 # README for Whole Frontend + Backend Setup for TCG_MultiScan
 
-**Set up FastAPI Backend**
+
+## Table of Contents
+* [Set up FastAPI Backend](#set-up-fastapi-backend)
+  * [If Backend Already Configured](#if-backend-already-configured)
+* [Set up React Frontend](#set-up-react-frontend)
+* [References](#references)
+
+
+
+## Set up FastAPI Backend
 
 First create .venv using python:
 ~~~
@@ -23,7 +32,7 @@ Install them using pip: `pip install -r requirements.txt`
 
 ------------------------------------
 
-**If Backend Already Configured**
+## If Backend Already Configured
 
 Ensure that the main.py (from the backend folder) is present.
 
@@ -32,7 +41,7 @@ Then, to start your backend server locally using Uvicorn:
 
 ------------------------------------
 
-**Set up React Frontend**
+## Set up React Frontend
 
 Use Vite to scaffold a fast modern React environment:
 ~~~
@@ -59,7 +68,7 @@ displaying data parsed straight from your backend
 
 
 
-**References**
+## References
 
 Google AI mode for generating instructions for initial setup and template code:
 https://share.google/aimode/WarGJK0N47lRro2J5
