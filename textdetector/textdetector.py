@@ -21,7 +21,7 @@ import datetime
 from module import helper
 
 # Recording start time for timer
-starttime = datetime.datetime.now()
+start_time = datetime.datetime.now()
 
 # Grabbing arguments from command line when executing command
 parser = argparse.ArgumentParser(description='Use this script to run text detection deep learning networks using OpenCV.')
@@ -54,40 +54,46 @@ parser.add_argument('--device', default="cpu", help="Device to inference on")
 parser.add_argument('--answername', type=str, default="", help="Location/name of answer .txt file.")
 
 # Indicator of whether or not we show text onto Rec2.jpg
-parser.add_argument('--showtext', action='store_true', help="Indicator of whether or not we show text onto Rec2.jpg image.")
+parser.add_argument('--showtext', action='store_true', help="Indicator of whether or not we show text onto Rec3.jpg image.")
 
 args = parser.parse_args()
 
 
-def convertMTGJSONNamesToVocabAndNames(jsonName):
+def convert_json_name_to_vocab_and_names(json_name):
     names = []
     non_names = [] # Second list of names reserved for things like type info and text of cards 
     unaltered_double_names = []
     separated_double_names = []
     double_temp_list = []
     V = {}
-    # AtomicCards_data is a dictionary of dictionaries of MTG card data...
-    with open(jsonName, 'r', encoding='utf-8') as AtomicCards_file:
-        AtomicCards_data = json.load(AtomicCards_file)
+    # atomic_cards_data is a dictionary of dictionaries of MTG card data...
+    try:
+        with open(json_name, 'r', encoding='utf-8') as file:
+            atomic_cards_data = json.load(file)
+    except FileNotFoundError:
+        print(f"Could not find {json_name}.")
+    except json.JSONDecodeError:
+        print(f"{json_name} is not a valid JSON.")
+
     # creating list/set of names
-    names = list(AtomicCards_data["data"].keys()) # First list of names
+    names = list(atomic_cards_data["data"].keys()) # First list of names
     #for each "name" in names
     for n in names:
-        if len(AtomicCards_data["data"][n]) > 1:
-            print("Initially looking at: ", helper.replace_bad_characters(n), "| 'Side' total:", len(AtomicCards_data["data"][n]))
+        if len(atomic_cards_data["data"][n]) > 1:
+            print("Initially looking at: ", helper.replace_bad_characters(n), "| 'Side' total:", len(atomic_cards_data["data"][n]))
             unaltered_double_names.append(n)
             double_temp_list = split_double_card_names(n)
             for dn in double_temp_list:
                 separated_double_names.append(dn)
                 print("Appending dn to double_names:", helper.replace_bad_characters(dn))
-        for index in range(0, len(AtomicCards_data["data"][n])):
+        for index in range(0, len(atomic_cards_data["data"][n])):
             #print("Looking at: ", n, "| 'Side' number:", index+1)
             print("Looking at: ", helper.replace_bad_characters(n), "| 'Side' number:", index+1)
-            #print("-Storing", AtomicCards_data["data"][n][index]["text"], "into non_names...")
-            if "text" in AtomicCards_data["data"][n][index]:
-                non_names.append(json.dumps(AtomicCards_data["data"][n][index]["text"]))
-            if "type" in AtomicCards_data["data"][n][index]:
-                non_names.append(json.dumps(AtomicCards_data["data"][n][index]["type"]))
+            #print("-Storing", atomic_cards_data["data"][n][index]["text"], "into non_names...")
+            if "text" in atomic_cards_data["data"][n][index]:
+                non_names.append(json.dumps(atomic_cards_data["data"][n][index]["text"]))
+            if "type" in atomic_cards_data["data"][n][index]:
+                non_names.append(json.dumps(atomic_cards_data["data"][n][index]["type"]))
 
     # Non-names are also "vocab" we are using. Counting them as "names" for simplicity.
     #print()
@@ -362,7 +368,7 @@ if __name__ == "__main__":
     
 
     print("-----Opening Atomic Cards JSON------")
-    V, names, non_names, separated_double_names, unaltered_double_names = convertMTGJSONNamesToVocabAndNames("AtomicCards.json")
+    V, names, non_names, separated_double_names, unaltered_double_names = convert_json_name_to_vocab_and_names("AtomicCards.json")
     
     
     # Counter of name frequency
@@ -640,7 +646,7 @@ if __name__ == "__main__":
     
     #Recording endtime and outputing elapsed time
     endtime = datetime.datetime.now()
-    elapsedtime = endtime - starttime
+    elapsedtime = endtime - start_time
     print("Elapsed Time:", elapsedtime)
 
     '''

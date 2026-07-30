@@ -89,7 +89,7 @@ Step 3: Using Python to run the program. (Be sure to make sure each dimension is
 
 Sample CMD (Windows) commands:
 
-`python textdetector.py --input 1_python-ocr.jpg --width 800 --height 352`
+`python textdetector.py --input 1_python-ocr.jpg --width 800 --height 352 --showtext`
 
 `python textdetector.py --input CardPileSample1.jpg --width 3072 --height 4096`
 
