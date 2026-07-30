@@ -107,12 +107,12 @@ def convert_json_name_to_vocab_and_names(json_name):
     #for vocab in V:
     #    if vocab == "Brazen Borrower":
     #        print("FOUND IT ---------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    return V, names, non_names, separated_double_names, unaltered_double_names
+    return(V, names, non_names, separated_double_names, unaltered_double_names)
 
 def split_double_card_names(n):
     if n.find(" // ") != -1:
-        return [n[:n.find(" // ")], n[n.find(" // ")+4:]]
-    return [n]
+        return([n[:n.find(" // ")], n[n.find(" // ")+4:]])
+    return([n])
 
 def decode(scores, geometry, scoreThresh):
     detections = []
@@ -167,18 +167,13 @@ def decode(scores, geometry, scoreThresh):
             confidences.append(float(score))
 
     # Return detections and confidences
-    return [detections, confidences]
+    return([detections, confidences])
 
 def merge_boxes(box1, box2):
     box1_xmin, box1_ymin, box1_xmax, box1_ymax = box1
     box2_xmin, box2_ymin, box2_xmax, box2_ymax = box2
 
-    return (
-        min(box1_xmin, box2_xmin),
-        min(box1_ymin, box2_ymin),
-        max(box1_xmax, box2_xmax),
-        max(box1_ymax, box2_ymax)
-    )
+    return( (min(box1_xmin, box2_xmin), min(box1_ymin, box2_ymin), max(box1_xmax, box2_xmax), max(box1_ymax, box2_ymax)) )
 
 def calc_sim(text, obj):
     # text: xmin, ymin, xmax, ymax
@@ -191,7 +186,7 @@ def calc_sim(text, obj):
 
     dist = x_dist + y_dist
 
-    return dist
+    return(dist)
 
 def compare_vertices_with_box_shows_overlap(vertices, boxtemp):
     index = 0
@@ -200,9 +195,9 @@ def compare_vertices_with_box_shows_overlap(vertices, boxtemp):
         # text: xmin, ymin, xmax, ymax
         # obj: xmin, ymin, xmax, ymax
         if (x1 >= boxtemp[0]) and (x1 <= boxtemp[2]) and (y1 >= boxtemp[1]) and (y1 <= boxtemp[3]):
-            return True
+            return(True)
         index = index + 1
-    return False
+    return(False)
 
 def is_overlap(text, obj):
     text_xmin, text_ymin, text_xmax, text_ymax = text
@@ -213,8 +208,8 @@ def is_overlap(text, obj):
 
     if (compare_vertices_with_box_shows_overlap(textvertices, obj) or compare_vertices_with_box_shows_overlap(objvertices, text)):
         #if compare is true (you found a vertex that is within the bbox of the other list of tuples)
-        return True
-    return False
+        return(True)
+    return(False)
 
 
 def merge_algo(bounding_boxes): #bounding_boxes is a list of bounding boxes data
@@ -232,8 +227,8 @@ def merge_algo(bounding_boxes): #bounding_boxes is a list of bounding boxes data
                 bounding_boxes.remove(k)
 
                 #Return True and new "bounding_boxes"
-                return True, bounding_boxes
-    return False, bounding_boxes
+                return(True, bounding_boxes)
+    return(False, bounding_boxes)
 
 #Finding Similar Names for autocorrector portion
 def mtg_autocorrect(input_word, V, name_freq_dict, probs):
@@ -251,8 +246,17 @@ def mtg_autocorrect(input_word, V, name_freq_dict, probs):
     df = pd.DataFrame.from_dict(probs, orient='index').reset_index()
     df = df.rename(columns={'index':'Name', 0:'Prob'})
     df['Similarity'] = similarities
-    output = df.sort_values(['Similarity', 'Prob'], ascending=False).head(1)
-    return output
+    output = df.sort_values(['Similarity', 'Prob'], ascending=False).head(1) #.iat[0,0]
+
+    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    #tempoutput = df.sort_values(['Similarity', 'Prob'], ascending=False).head(20) #.iat[0,0]
+    #print(tempoutput)
+    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    
+    #print("output:\n", output)
+    #if output.iat[0,2] <= 0.1:
+    #    return("")
+    return(output)
 
 #Converting txt file true list for accuracy checker.
 #Input: Text file name or location
@@ -264,7 +268,7 @@ def convertTxtFileAnswerToList(aname):
         outputlist.append(x.strip())
         print("During conversion from answer file -> list:|" + str(x.strip()) + "|")
     f.close()
-    return outputlist
+    return(outputlist)
 
 #Finding out the accuracy of results compared to answer list
 def runAccuracyChecker(bestNameListNameOnly, answerList):
@@ -316,7 +320,7 @@ def find_good_thresh(cap):
     print("Highest: " + str(highest))
     print("(Lowest+Highest)/2: " + str(int_result))
 
-    return int_result
+    return(int_result)
 
 if __name__ == "__main__":
     # Read and store arguments
