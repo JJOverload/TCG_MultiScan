@@ -21,7 +21,7 @@ import datetime
 from module import helper
 
 # Recording start time for timer
-starttime = datetime.datetime.now()
+start_time = datetime.datetime.now()
 
 # Grabbing arguments from command line when executing command
 parser = argparse.ArgumentParser(description='Use this script to run text detection deep learning networks using OpenCV.')
@@ -54,40 +54,46 @@ parser.add_argument('--device', default="cpu", help="Device to inference on")
 parser.add_argument('--answername', type=str, default="", help="Location/name of answer .txt file.")
 
 # Indicator of whether or not we show text onto Rec2.jpg
-parser.add_argument('--showtext', action='store_true', help="Indicator of whether or not we show text onto Rec2.jpg image.")
+parser.add_argument('--showtext', action='store_true', help="Indicator of whether or not we show text onto Rec3.jpg image.")
 
 args = parser.parse_args()
 
 
-def convertMTGJSONNamesToVocabAndNames(jsonName):
+def convert_json_name_to_vocab_and_names(json_name):
     names = []
     non_names = [] # Second list of names reserved for things like type info and text of cards 
     unaltered_double_names = []
     separated_double_names = []
     double_temp_list = []
     V = {}
-    # AtomicCards_data is a dictionary of dictionaries of MTG card data...
-    with open(jsonName, 'r', encoding='utf-8') as AtomicCards_file:
-        AtomicCards_data = json.load(AtomicCards_file)
+    # atomic_cards_data is a dictionary of dictionaries of MTG card data...
+    try:
+        with open(json_name, 'r', encoding='utf-8') as file:
+            atomic_cards_data = json.load(file)
+    except FileNotFoundError:
+        print(f"Could not find {json_name}.")
+    except json.JSONDecodeError:
+        print(f"{json_name} is not a valid JSON.")
+
     # creating list/set of names
-    names = list(AtomicCards_data["data"].keys()) # First list of names
+    names = list(atomic_cards_data["data"].keys()) # First list of names
     #for each "name" in names
     for n in names:
-        if len(AtomicCards_data["data"][n]) > 1:
-            print("Initially looking at: ", helper.replace_bad_characters(n), "| 'Side' total:", len(AtomicCards_data["data"][n]))
+        if len(atomic_cards_data["data"][n]) > 1:
+            print("Initially looking at: ", helper.replace_bad_characters(n), "| 'Side' total:", len(atomic_cards_data["data"][n]))
             unaltered_double_names.append(n)
             double_temp_list = split_double_card_names(n)
             for dn in double_temp_list:
                 separated_double_names.append(dn)
                 print("Appending dn to double_names:", helper.replace_bad_characters(dn))
-        for index in range(0, len(AtomicCards_data["data"][n])):
+        for index in range(0, len(atomic_cards_data["data"][n])):
             #print("Looking at: ", n, "| 'Side' number:", index+1)
             print("Looking at: ", helper.replace_bad_characters(n), "| 'Side' number:", index+1)
-            #print("-Storing", AtomicCards_data["data"][n][index]["text"], "into non_names...")
-            if "text" in AtomicCards_data["data"][n][index]:
-                non_names.append(json.dumps(AtomicCards_data["data"][n][index]["text"]))
-            if "type" in AtomicCards_data["data"][n][index]:
-                non_names.append(json.dumps(AtomicCards_data["data"][n][index]["type"]))
+            #print("-Storing", atomic_cards_data["data"][n][index]["text"], "into non_names...")
+            if "text" in atomic_cards_data["data"][n][index]:
+                non_names.append(json.dumps(atomic_cards_data["data"][n][index]["text"]))
+            if "type" in atomic_cards_data["data"][n][index]:
+                non_names.append(json.dumps(atomic_cards_data["data"][n][index]["type"]))
 
     # Non-names are also "vocab" we are using. Counting them as "names" for simplicity.
     #print()
@@ -101,12 +107,12 @@ def convertMTGJSONNamesToVocabAndNames(jsonName):
     #for vocab in V:
     #    if vocab == "Brazen Borrower":
     #        print("FOUND IT ---------------------------<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
-    return(V, names, non_names, separated_double_names, unaltered_double_names)
+    return V, names, non_names, separated_double_names, unaltered_double_names
 
 def split_double_card_names(n):
     if n.find(" // ") != -1:
-        return([n[:n.find(" // ")], n[n.find(" // ")+4:]])
-    return([n])
+        return [n[:n.find(" // ")], n[n.find(" // ")+4:]]
+    return [n]
 
 def decode(scores, geometry, scoreThresh):
     detections = []
@@ -167,7 +173,12 @@ def merge_boxes(box1, box2):
     box1_xmin, box1_ymin, box1_xmax, box1_ymax = box1
     box2_xmin, box2_ymin, box2_xmax, box2_ymax = box2
 
-    return( (min(box1_xmin, box2_xmin), min(box1_ymin, box2_ymin), max(box1_xmax, box2_xmax), max(box1_ymax, box2_ymax)) )
+    return (
+        min(box1_xmin, box2_xmin),
+        min(box1_ymin, box2_ymin),
+        max(box1_xmax, box2_xmax),
+        max(box1_ymax, box2_ymax)
+    )
 
 def calc_sim(text, obj):
     # text: xmin, ymin, xmax, ymax
@@ -180,7 +191,7 @@ def calc_sim(text, obj):
 
     dist = x_dist + y_dist
 
-    return(dist)
+    return dist
 
 def compare_vertices_with_box_shows_overlap(vertices, boxtemp):
     index = 0
@@ -189,9 +200,9 @@ def compare_vertices_with_box_shows_overlap(vertices, boxtemp):
         # text: xmin, ymin, xmax, ymax
         # obj: xmin, ymin, xmax, ymax
         if (x1 >= boxtemp[0]) and (x1 <= boxtemp[2]) and (y1 >= boxtemp[1]) and (y1 <= boxtemp[3]):
-            return(True)
+            return True
         index = index + 1
-    return(False)
+    return False
 
 def is_overlap(text, obj):
     text_xmin, text_ymin, text_xmax, text_ymax = text
@@ -202,27 +213,27 @@ def is_overlap(text, obj):
 
     if (compare_vertices_with_box_shows_overlap(textvertices, obj) or compare_vertices_with_box_shows_overlap(objvertices, text)):
         #if compare is true (you found a vertex that is within the bbox of the other list of tuples)
-        return(True)
-    return(False)
+        return True
+    return False
 
 
-def merge_algo(bboxes): #bboxes is a list of bounding boxes data
-    for j in bboxes:
-        for k in bboxes:
+def merge_algo(bounding_boxes): #bounding_boxes is a list of bounding boxes data
+    for j in bounding_boxes:
+        for k in bounding_boxes:
             if j == k: #continue on if we are comparing a box with itself
                 continue
-            # Find out if these two bboxes are within distance limit
+            # Find out if these two bounding_boxes are within distance limit
             if (calc_sim(j, k) < dist_limit) or (is_overlap(j, k) == True):
                 # Create a new box
                 new_box = merge_boxes(j, k)
-                bboxes.append(new_box)
+                bounding_boxes.append(new_box)
                 # Remove previous boxes
-                bboxes.remove(j)
-                bboxes.remove(k)
+                bounding_boxes.remove(j)
+                bounding_boxes.remove(k)
 
-                #Return True and new "bboxes"
-                return(True, bboxes)
-    return(False, bboxes)
+                #Return True and new "bounding_boxes"
+                return True, bounding_boxes
+    return False, bounding_boxes
 
 #Finding Similar Names for autocorrector portion
 def mtg_autocorrect(input_word, V, name_freq_dict, probs):
@@ -240,17 +251,8 @@ def mtg_autocorrect(input_word, V, name_freq_dict, probs):
     df = pd.DataFrame.from_dict(probs, orient='index').reset_index()
     df = df.rename(columns={'index':'Name', 0:'Prob'})
     df['Similarity'] = similarities
-    output = df.sort_values(['Similarity', 'Prob'], ascending=False).head(1) #.iat[0,0]
-
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    #tempoutput = df.sort_values(['Similarity', 'Prob'], ascending=False).head(20) #.iat[0,0]
-    #print(tempoutput)
-    #print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    
-    #print("output:\n", output)
-    #if output.iat[0,2] <= 0.1:
-    #    return("")
-    return(output)
+    output = df.sort_values(['Similarity', 'Prob'], ascending=False).head(1)
+    return output
 
 #Converting txt file true list for accuracy checker.
 #Input: Text file name or location
@@ -262,7 +264,7 @@ def convertTxtFileAnswerToList(aname):
         outputlist.append(x.strip())
         print("During conversion from answer file -> list:|" + str(x.strip()) + "|")
     f.close()
-    return(outputlist)
+    return outputlist
 
 #Finding out the accuracy of results compared to answer list
 def runAccuracyChecker(bestNameListNameOnly, answerList):
@@ -314,7 +316,7 @@ def find_good_thresh(cap):
     print("Highest: " + str(highest))
     print("(Lowest+Highest)/2: " + str(int_result))
 
-    return(int_result)
+    return int_result
 
 if __name__ == "__main__":
     # Read and store arguments
@@ -362,7 +364,7 @@ if __name__ == "__main__":
     
 
     print("-----Opening Atomic Cards JSON------")
-    V, names, non_names, separated_double_names, unaltered_double_names = convertMTGJSONNamesToVocabAndNames("AtomicCards.json")
+    V, names, non_names, separated_double_names, unaltered_double_names = convert_json_name_to_vocab_and_names("AtomicCards.json")
     
     
     # Counter of name frequency
@@ -464,11 +466,11 @@ if __name__ == "__main__":
     cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
     
 
-    #print("-----Printing Out Initial \"bboxes\"-----:")
+    #print("-----Printing Out Initial \"bounding_boxes\"-----:")
     #for b in bbox:
     #    print(b)
 
-    print("-----Merging Initial \"bboxes\"-----:")
+    print("-----Merging Initial \"bounding_boxes\"-----:")
     #Merge the boxes
     need_to_merge = True
     while need_to_merge:
@@ -509,7 +511,7 @@ if __name__ == "__main__":
     initial_bestOutput = mtg_autocorrect("", V, name_freq_dict, probs)
     countdowncounter = 0
     
-    print("-----Iterating Through Merged \"bboxes\"-----:")
+    print("-----Iterating Through Merged \"bounding_boxes\"-----:")
     for b in bbox:
         counter += 1
         print("->", counter, b)
@@ -640,7 +642,7 @@ if __name__ == "__main__":
     
     #Recording endtime and outputing elapsed time
     endtime = datetime.datetime.now()
-    elapsedtime = endtime - starttime
+    elapsedtime = endtime - start_time
     print("Elapsed Time:", elapsedtime)
 
     '''

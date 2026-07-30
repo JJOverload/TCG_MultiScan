@@ -1,0 +1,44 @@
+-----Outputing Best Name List-----
+[('Mountain', 1.0, (2147, 2217, 2237, 2243), 1), ('Mountain', 1.0, (2180, 2332, 2267, 2359), 2), ('Terminate', 0.6666666666666666, (468, 1932, 548, 1956), 3), ('Propaganda', 0.30000000000000004, (840, 1462, 919, 1485), 6), ("Teferi's Protection", 0.3939393939393939, (785, 1690, 917, 1722), 11), ('Rakdos Signet', 0.7692307692307693, (359, 2405, 484, 2437), 12), ('Heartless Hidetsugu', 1.0, (1486, 1464, 1625, 1490), 13), ('Mountain', 0.6666666666666666, (2546, 2104, 2632, 2181), 14), ('Shadowblood Ridge', 0.8823529411764706, (2117, 2131, 2288, 2158), 15), ('Mother of Runes', 0.6842105263157895, (225, 1402, 338, 1425), 16), ('Escape Tunnel', 1.0, (2179, 2402, 2314, 2434), 18), ('Raucous Carnival', 1.0, (2084, 1815, 2221, 1843), 19), ('Dragonskull Summit', 1.0, (2248, 2731, 2441, 2760), 21), ('Boros Signet', 0.4, (324, 2533, 443, 2566), 22), ('Vizkopa Guildmage', 0.6842105263157895, (475, 1861, 624, 1894), 23), ('Arcane Signet', 1.0, (455, 1995, 561, 2022), 24), ('Ghost Quarter', 0.9166666666666666, (2507, 1891, 2627, 1914), 26), ('Blood Crypt', 0.9, (2209, 2524, 2322, 2553), 27), ('Graven Cairns', 0.6111111111111112, (2144, 2061, 2271, 2088), 29), ('Plains', 1.0, (2515, 1953, 2586, 2024), 30), ('Strionic Resonator', 0.9411764705882353, (502, 1794, 645, 1818), 33), ('Razortrap Gorge', 1.0, (2079, 1741, 2207, 1766), 34), ('Mind Stone', 0.8888888888888888, (602, 1422, 682, 1446), 35), ('Blood Artist', 1.0, (639, 1357, 721, 1381), 36), ('Orzhov Signet', 0.6111111111111112, (383, 2319, 505, 2350), 37), ('City of Brass', 1.0, (2234, 2603, 2348, 2635), 39), ('Vivid Meadow', 0.6666666666666666, (2466, 1730, 2630, 1850), 40), ('Talisman of Conviction', 1.0, (407, 2076, 588, 2109), 42), ('Talisman of Hierarchy', 1.0, (537, 1731, 691, 1755), 43), ('Read the Bones', 0.8571428571428571, (807, 1624, 920, 1648), 45), ('Sol Ring', 0.33333333333333326, (326, 1186, 461, 1256), 47), ('Talisman of Indulgence', 0.5909090909090909, (381, 2227, 571, 2277), 48), ('Mathas, Fiend Seeker', 0.6, (1247, 2321, 1428, 2358), 49), ('Lightning Greaves', 0.9375, (577, 1481, 698, 1564), 51), ('Everflowing Chalice', 0.5, (546, 1611, 687, 1695), 52), ('Isolated Chapel', 0.5625, (2090, 1883, 2253, 2017), 53), ('Marsh Flats', 0.6, (2590, 2214, 2754, 2281), 54), ('Temple of Malice', 0.8666666666666667, (2480, 1548, 2616, 1679), 55)]
+Length of bestNameList: 38
+Mountain
+Mountain
+Terminate
+Propaganda
+Teferi's Protection
+Rakdos Signet
+Heartless Hidetsugu
+Mountain
+Shadowblood Ridge
+Mother of Runes
+Escape Tunnel
+Raucous Carnival
+Dragonskull Summit
+Boros Signet
+Vizkopa Guildmage
+Arcane Signet
+Ghost Quarter
+Blood Crypt
+Graven Cairns
+Plains
+Strionic Resonator
+Razortrap Gorge
+Mind Stone
+Blood Artist
+Orzhov Signet
+City of Brass
+Vivid Meadow
+Talisman of Conviction
+Talisman of Hierarchy
+Read the Bones
+Sol Ring
+Talisman of Indulgence
+Mathas, Fiend Seeker
+Lightning Greaves
+Everflowing Chalice
+Isolated Chapel
+Marsh Flats
+Temple of Malice
+Elapsed Time: 0:44:54.462541
+
+C:\Users\blue_\Documents\GitHub\TCG_MultiScan\textdetector>
