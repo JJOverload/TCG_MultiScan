@@ -20,4 +20,7 @@ Then:
 
 `pip install easyocr`
 
+(Also try to ensure that OpenCV is properly installed afterwards. If not, try this: `pip install opencv-python`)
+
+
 -----------------------------------------
