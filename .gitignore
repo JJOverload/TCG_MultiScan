@@ -14,5 +14,5 @@ CardTypes.json
 /TCG_MultiScan/backend/.venv/
 /TCG_MultiScan/backend/__pycache__/
 */.venv/
-*.jpg
+*-modified.jpg
 
