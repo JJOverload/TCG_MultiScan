@@ -43,14 +43,14 @@ Then, to start your backend server locally using Uvicorn:
 
 ## Set up React Frontend
 
-Use Vite to scaffold a fast modern React environment:
+If not done already, use Vite to scaffold a fast modern React environment:
 ~~~
 npm create vite@latest frontend -- --template react
 cd frontend
 npm install
 ~~~
 
-If scaffolding done, can go straight to starting your React development environment:
+If scaffolding done (now or already), can go straight to starting your React development environment:
 `npm run dev`
 
 (Note to self: for production, would want to use slightly different commands for presentation under real-world settings.)
