@@ -25,3 +25,8 @@ Then:
 
 -----------------------------------------
 
+
+**Reference**
+
+- "Best OCR Models to Extract Text from Images" by Kevin Wood:<br>
+https://www.youtube.com/watch?v=00zR9rJnecA
