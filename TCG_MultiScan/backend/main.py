@@ -25,7 +25,10 @@ async def get_data():
 # To start your backend server locally using Uvicorn
 # uvicorn main:app --reload
 
-# Use Vite to scaffold a fast modern React environment
+# If not done already, use Vite to scaffold a fast modern React environment
 # npm create vite@latest frontend -- --template react
 # cd frontend
 # npm install
+
+# If scaffolding done (now or already), can go straight to starting your React development environment:
+# npm run dev
