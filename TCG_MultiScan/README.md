@@ -72,5 +72,5 @@ If you need the optional static type checker for Python:
 
 ## References
 
-Google AI mode for generating instructions for initial setup and template code:
+Google AI mode prompt response for generating instructions for initial setup and template code:
 https://share.google/aimode/WarGJK0N47lRro2J5
