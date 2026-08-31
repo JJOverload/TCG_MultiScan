@@ -35,6 +35,8 @@ for name in scan_names:
                     height_ths=1.0, #not default
                     width_ths=1.0
                     )
+
+    counter = 0
     for bbox, text, confidence in results:
         '''
         print("-----TEST START-----")
@@ -43,10 +45,14 @@ for name in scan_names:
         print(bbox)
         print("-----TEST END-----")
         '''
-        print("Text:", text)
+        counter += 1
+        print((str(counter)+"."), "Text:", text)
         print("Confidence:", confidence)
         print("Bounding Boxes:", bbox)
         bbox_draw(image, bbox)
+        # cv.putText(image, 'OpenCV', org, font, fontScale, color, thickness, cv2.LINE_AA)
+        # (int(bbox[0][0]), int(bbox[0][1]) are for coordinates using the first bbox's x and y point values. (0,0) located on top left of the image, which is used to determine x and y values for coordinates.
+        cv.putText(image, str(str(counter)+": "+text), (int(bbox[0][0]), int(bbox[0][1])), cv.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2, cv.LINE_AA)
         print("--------------------------------------------")
 
     end_time = datetime.datetime.now()

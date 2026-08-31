@@ -43,6 +43,8 @@ Then, to start your backend server locally using Uvicorn:
 
 ## Set up React Frontend
 
+In another terminal:
+
 If not done already, use Vite to scaffold a fast modern React environment:
 ~~~
 npm create vite@latest frontend -- --template react
