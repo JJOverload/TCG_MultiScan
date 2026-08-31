@@ -5,7 +5,7 @@
 Since Tesseract is slower for the real life photos due to the needed multiple tries/rotations, would like to try out "easyocr" instead.
 
 TODO:
-Would need to find ways to adjust bbox merging algorithm for easyocr
+Would need to find ways to adjust bbox merging algorithm for easyocr. Done.
 
 -----------------------------------------
 
