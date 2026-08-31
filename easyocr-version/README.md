@@ -6,6 +6,7 @@ Since Tesseract is slower for the real life photos due to the needed multiple tr
 
 TODO:
 Would need to find ways to adjust bbox merging algorithm for easyocr. Done.
+Need to add text to each bbox in image. Done.
 
 -----------------------------------------
 
